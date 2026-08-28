@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, Tanu! ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Caveat:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://demo-happy-birthday-my-love.netlify.app/assets/index-shsCG4sW.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+      #no-btn {
+        transition: transform 0.2s ease;
+        position: relative;
+      }
+      .hidden {
+        display: none !important;
+      }
+
+      @keyframes floatUp {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(1.5deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+      }
+
+      .balloon-btn {
+        animation: floatUp 3s ease-in-out infinite;
+        transition: transform 0.2s ease;
+      }
+
+      @keyframes cakeFloat {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-12px) rotate(1deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+      }
+
+      .cake-floating {
+        animation: cakeFloat 3.5s ease-in-out infinite;
+      }
+
+      @keyframes gentleFloat {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+      }
+
+      .floating-element {
+        animation: gentleFloat 3.5s ease-in-out infinite;
+      }
+
+      /* Added floating animation classes for Bouquet, Envelope, and Gift Box */
+      .bouquet-floating {
+        animation: gentleFloat 3.4s ease-in-out infinite;
+      }
+
+      .envelope-floating {
+        animation: gentleFloat 3.6s ease-in-out infinite;
+      }
+
+      .gift-floating {
+        animation: cakeFloat 3.2s ease-in-out infinite;
+      }
+
+      @keyframes popBurst {
+        0% { transform: scale(1); opacity: 1; }
+        40% { transform: scale(1.25); opacity: 0.9; }
+        100% { transform: scale(0); opacity: 0; }
+      }
+
+      .balloon-popped {
+        animation: popBurst 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+        pointer-events: none;
+      }
+
+      .message-box {
+        animation: fadeIn 0.4s ease-in-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .tab-active {
+        background: linear-gradient(135deg, var(--crimson), hsl(343, 65%, 34%)) !important;
+        border-color: transparent !important;
+        box-shadow: rgba(224, 49, 102, 0.45) 0px 10px 25px !important;
+      }
+
+      .tab-active svg {
+        color: #ffffff !important;
+      }
+
+      .badge-dot {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .envelope-box {
+        width: 280px;
+        height: 180px;
+        background: #fcaec1;
+        border-radius: 12px;
+        position: relative;
+        box-shadow: 0 10px 25px rgba(244, 63, 94, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .envelope-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 140px solid transparent;
+        border-right: 140px solid transparent;
+        border-top: 100px solid #f48fb1;
+        z-index: 2;
+      }
+      .envelope-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 140px solid #f8bbd0;
+        border-right: 140px solid #f8bbd0;
+        border-bottom: 90px solid #f06292;
+        border-radius: 0 0 12px 12px;
+        z-index: 1;
+      }
+
+      @keyframes petalPath1 {
+        0% { transform: translateY(15px) translateX(0) rotate(0deg); opacity: 0; }
+        15% { opacity: 0.95; }
+        85% { opacity: 0.95; }
+        100% { transform: translateY(-300px) translateX(55px) rotate(220deg); opacity: 0; }
+      }
+      @keyframes petalPath2 {
+        0% { transform: translateY(15px) translateX(0) rotate(0deg); opacity: 0; }
+        15% { opacity: 0.95; }
+        85% { opacity: 0.95; }
+        100% { transform: translateY(-280px) translateX(-65px) rotate(-190deg); opacity: 0; }
+      }
+      @keyframes petalPath3 {
+        0% { transform: translateY(20px) translateX(0) rotate(0deg); opacity: 0; }
+        20% { opacity: 0.95; }
+        80% { opacity: 0.95; }
+        100% { transform: translateY(-320px) translateX(25px) rotate(150deg); opacity: 0; }
+      }
+      @keyframes petalPath4 {
+        0% { transform: translateY(20px) translateX(0) rotate(0deg); opacity: 0; }
+        20% { opacity: 0.95; }
+        80% { opacity: 0.95; }
+        100% { transform: translateY(-290px) translateX(-35px) rotate(-130deg); opacity: 0; }
+      }
+
+      .floating-petal {
+        position: absolute;
+        width: 15px;
+        height: 22px;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0;
+      }
+      .petal-a { animation: petalPath1 1.2s ease-out forwards; }
+      .petal-b { animation: petalPath2 1.3s ease-out forwards 0.1s; }
+      .petal-c { animation: petalPath3 1.1s ease-out forwards 0.2s; }
+      .petal-d { animation: petalPath4 1.4s ease-out forwards 0.15s; }
+      .petal-e { animation: petalPath1 1.25s ease-out forwards 0.25s; }
+      .petal-f { animation: petalPath2 1.15s ease-out forwards 0.05s; }
+      .petal-g { animation: petalPath3 1.35s ease-out forwards 0.3s; }
+      .petal-h { animation: petalPath4 1.2s ease-out forwards 0.1s; }
+      .petal-i { animation: petalPath1 1.3s ease-out forwards 0.2s; }
+      .petal-j { animation: petalPath2 1.25s ease-out forwards 0.15s; }
+    </style>
+  </head>
+  <body class="bg-[#fcf8f2]">
+
+    <div style="position: fixed; top: 1rem; right: 1rem; z-index: 50;">
+      <audio id="bg-music" preload="auto" autoplay loop>
+        <source src="https://raw.githubusercontent.com/Rahul41076/My-music/main/Taylor%20Swift%20-%20Lover.mp3" type="audio/mpeg">
+      </audio>
+      <button onclick="toggleAudio()" id="audio-btn" style="background: rgb(241, 236, 228); border: 1px solid rgb(216, 209, 202); border-radius: 50%; width: 42px; height: 42px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <svg id="audio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(138, 111, 92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+      </button>
+    </div>
+
+    <div id="root">
+      <div class="min-h-screen overflow-hidden relative">
+        
+        <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+          <div class="absolute" style="left: 39.9%; bottom: -5%; opacity: 0.3; animation: 19.7s linear infinite float-up;"><span style="font-size: 25px; color: rgb(236, 121, 150);">❤</span></div>
+          <div class="absolute" style="left: 67.9%; bottom: -5%; opacity: 0.2; animation: 18.5s linear infinite float-up;"><span style="font-size: 20px; color: rgb(236, 121, 150);">❤</span></div>
+          <div class="absolute" style="left: 6.5%; bottom: -5%; opacity: 0.2; animation: 14.9s linear infinite float-up;"><span style="font-size: 14px; color: rgb(236, 121, 150);">❤</span></div>
+          <div class="absolute" style="left: 85.5%; bottom: -5%; opacity: 0.3; animation: 16.7s linear infinite float-up;"><span style="font-size: 18px; color: rgb(236, 121, 150);">❤</span></div>
+        </div>
+
+        <div id="page-1" class="min-h-screen flex flex-col items-center justify-center px-6 py-12 text-center relative z-10">
+          <h1 class="font-cursive text-5xl sm:text-6xl md:text-7xl text-crimson leading-tight">
+            Happy Birthday Tanu <span class="text-pink">❤️</span>
+          </h1>
+
+          <div class="relative my-6 sm:my-8 w-64 sm:w-80 md:w-96">
+            <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-full blur-3xl" style="background: radial-gradient(circle, hsl(var(--pink-soft) / 0.9) 0%, hsl(var(--background) / 0) 70%); transform: scale(1.3);"></div>
+            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/intro-bears-DM-WCo3a.jpg" alt="Bears" class="w-full h-auto" style="mix-blend-mode: multiply;">
+          </div>
+
+          <p class="font-body text-sm sm:text-base text-ink/70 mb-5 max-w-md mx-auto px-4 leading-relaxed">
+            I created a little something just for you, Tanu, to celebrate how beautiful you make my life. Ready to see it?
+          </p>
+
+          <div class="flex gap-6 items-center justify-center min-h-[60px] relative w-full max-w-xs">
+            <button id="p1-yes-btn" class="px-14 py-5 text-xl sm:text-2xl rounded-full font-body font-semibold text-white transition-transform active:scale-95" style="background: var(--gradient-pink); box-shadow: var(--shadow-pink);">
+              Yes
+            </button>
+            <button id="no-btn" class="px-14 py-5 text-xl sm:text-2xl rounded-full font-body font-semibold text-crimson bg-white border border-pink-soft" style="box-shadow: var(--shadow-soft);">
+              No
+            </button>
+          </div>
+        </div>
+
+        <div id="page-2" class="min-h-screen flex flex-col items-center justify-center px-6 py-12 text-center hidden relative z-10">
+          <button id="p2-back-btn" class="fixed top-4 left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300" style="background: rgb(241, 236, 228); border: 1px solid rgb(216, 209, 202); color: rgb(138, 111, 92);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-crimson mb-2">Pop the Balloons</h2>
+          <p class="font-cursive text-2xl sm:text-3xl text-maroon/80 mb-8">and reveal a message from my heart for you...</p>
+
+          <div class="grid grid-cols-2 gap-6 sm:gap-8 mb-6">
+            <div class="flex flex-col items-center">
+              <div class="relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center">
+                <button class="balloon-btn relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center" data-msg="You make my every single day brighter ✨">
+                  <svg viewBox="0 0 100 140" class="w-full h-full" style="filter: drop-shadow(rgba(0, 0, 0, 0.18) 0px 8px 10px);">
+                    <defs>
+                      <radialGradient id="g-blue" cx="32%" cy="28%" r="75%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
+                        <stop offset="25%" stop-color="#a9d4f0" stop-opacity="0.85"></stop>
+                        <stop offset="75%" stop-color="#a9d4f0" stop-opacity="1"></stop>
+                        <stop offset="100%" stop-color="#5fa3d1" stop-opacity="1"></stop>
+                      </radialGradient>
+                    </defs>
+                    <ellipse cx="50" cy="50" rx="38" ry="46" fill="url(#g-blue)"></ellipse>
+                    <path d="M50 96 L45 105 L55 105 Z" fill="#5fa3d1"></path>
+                    <path d="M50 105 Q44 120 50 132 Q56 124 50 140" stroke="#7fbce0" stroke-width="1.5" fill="none"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="msg-container h-12 sm:h-14 mt-2 flex items-center justify-center"></div>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <div class="relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center">
+                <button class="balloon-btn relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center" data-msg="Your smile is my favorite thing 🫶">
+                  <svg viewBox="0 0 100 140" class="w-full h-full" style="filter: drop-shadow(rgba(0, 0, 0, 0.18) 0px 8px 10px);">
+                    <defs>
+                      <radialGradient id="g-pink" cx="32%" cy="28%" r="75%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
+                        <stop offset="25%" stop-color="#f4b5c0" stop-opacity="0.85"></stop>
+                        <stop offset="75%" stop-color="#f4b5c0" stop-opacity="1"></stop>
+                        <stop offset="100%" stop-color="#d97a8e" stop-opacity="1"></stop>
+                      </radialGradient>
+                    </defs>
+                    <ellipse cx="50" cy="50" rx="38" ry="46" fill="url(#g-pink)"></ellipse>
+                    <path d="M50 96 L45 105 L55 105 Z" fill="#d97a8e"></path>
+                    <path d="M50 105 Q44 120 50 132 Q56 124 50 140" stroke="#e89aa9" stroke-width="1.5" fill="none"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="msg-container h-12 sm:h-14 mt-2 flex items-center justify-center"></div>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <div class="relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center">
+                <button class="balloon-btn relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center" data-msg="So grateful for all our sweet memories 🌸">
+                  <svg viewBox="0 0 100 140" class="w-full h-full" style="filter: drop-shadow(rgba(0, 0, 0, 0.18) 0px 8px 10px);">
+                    <defs>
+                      <radialGradient id="g-green" cx="32%" cy="28%" r="75%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
+                        <stop offset="25%" stop-color="#b8e0c2" stop-opacity="0.85"></stop>
+                        <stop offset="75%" stop-color="#b8e0c2" stop-opacity="1"></stop>
+                        <stop offset="100%" stop-color="#6fb185" stop-opacity="1"></stop>
+                      </radialGradient>
+                    </defs>
+                    <ellipse cx="50" cy="50" rx="38" ry="46" fill="url(#g-green)"></ellipse>
+                    <path d="M50 96 L45 105 L55 105 Z" fill="#6fb185"></path>
+                    <path d="M50 105 Q44 120 50 132 Q56 124 50 140" stroke="#8cc7a0" stroke-width="1.5" fill="none"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="msg-container h-12 sm:h-14 mt-2 flex items-center justify-center"></div>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <div class="relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center">
+                <button class="balloon-btn relative w-24 h-32 sm:w-28 sm:h-36 flex items-end justify-center" data-msg="Wishing you the happiest year ahead 🎉">
+                  <svg viewBox="0 0 100 140" class="w-full h-full" style="filter: drop-shadow(rgba(0, 0, 0, 0.18) 0px 8px 10px);">
+                    <defs>
+                      <radialGradient id="g-purple" cx="32%" cy="28%" r="75%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
+                        <stop offset="25%" stop-color="#c8b8e6" stop-opacity="0.85"></stop>
+                        <stop offset="75%" stop-color="#c8b8e6" stop-opacity="1"></stop>
+                        <stop offset="100%" stop-color="#8e72c2" stop-opacity="1"></stop>
+                      </radialGradient>
+                    </defs>
+                    <ellipse cx="50" cy="50" rx="38" ry="46" fill="url(#g-purple)"></ellipse>
+                    <path d="M50 96 L45 105 L55 105 Z" fill="#8e72c2"></path>
+                    <path d="M50 105 Q44 120 50 132 Q56 124 50 140" stroke="#a890d4" stroke-width="1.5" fill="none"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="msg-container h-12 sm:h-14 mt-2 flex items-center justify-center"></div>
+            </div>
+          </div>
+
+          <div id="continue-container" class="hidden message-box mt-6">
+            <button id="p2-continue-btn" class="px-10 py-4 text-lg font-body font-semibold text-white rounded-full transition-transform active:scale-95 shadow-lg" style="background: var(--gradient-pink);">
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <div id="page-3" class="min-h-screen flex flex-col items-center justify-center px-6 py-12 text-center hidden relative overflow-hidden z-10">
+          <button id="p3-back-btn" class="fixed top-4 left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300" style="background: rgb(241, 236, 228); border: 1px solid rgb(216, 209, 202); color: rgb(138, 111, 92);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          
+          <h2 class="font-cursive text-3xl sm:text-4xl md:text-5xl text-crimson mb-2 mt-4">
+            Make a wish Tanu... <span class="text-pink">💕</span>
+          </h2>
+          <p class="font-display italic text-sm sm:text-base text-pink mb-8">
+            Close your eyes Tanu and hold a special wish in your heart
+          </p>
+          
+          <div class="relative w-64 sm:w-72 md:w-80 select-none mb-6 cake-floating">
+            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/cake-L8I26anr.png" alt="Cake" class="w-full h-auto drop-shadow-xl relative z-10">
+          </div>
+
+          <div class="flex flex-col items-center gap-4 z-30">
+            <button id="p3-continue-btn" class="px-10 py-3 rounded-full font-body font-bold text-white relative overflow-hidden group shadow-lg transition-all duration-200" style="background: var(--gradient-pink); box-shadow: var(--shadow-pink);">
+              <span class="relative z-10">Continue</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="page-4" class="min-h-screen flex flex-col items-center justify-center px-6 py-10 text-center hidden relative overflow-hidden z-10">
+          <div class="absolute w-80 h-80 rounded-full blur-[100px] opacity-25 transition-all duration-1000 pointer-events-none" style="background: var(--crimson); left: 50%; top: 55%; transform: translate(-50%, -50%);"></div>
+          
+          <button id="p4-back-btn" class="fixed top-4 left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300" style="background: rgb(241, 236, 228); border: 1px solid rgb(216, 209, 202); color: rgb(138, 111, 92);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          <h2 class="font-cursive text-3xl sm:text-4xl md:text-5xl text-crimson mb-2 mt-4">
+            For Tanu, who brings beauty to my world 🌷
+          </h2>
+          <p class="font-display italic text-sm sm:text-base text-pink mb-6">
+            Each button represents a reason why you are so special to me
+          </p>
+
+          <div class="flex gap-4 sm:gap-6 justify-center mb-6 mt-2 relative z-10">
+            <button class="reason-tab w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 relative" data-index="0" style="background: rgba(255, 255, 255, 0.75); border: 2.5px solid var(--pink-soft); box-shadow: var(--shadow-soft);">
+              <span class="badge-dot" style="background: #111111;"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300" style="color: #111111;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+            </button>
+            <button class="reason-tab w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 relative" data-index="1" style="background: rgba(255, 255, 255, 0.75); border: 2.5px solid var(--pink-soft); box-shadow: var(--shadow-soft);">
+              <span class="badge-dot" style="background: #f48fb1;"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300" style="color: rgb(243, 104, 143);"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
+            </button>
+            <button class="reason-tab w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 relative" data-index="2" style="background: rgba(255, 255, 255, 0.75); border: 2.5px solid var(--pink-soft); box-shadow: var(--shadow-soft);">
+              <span class="badge-dot" style="background: #f4ba34;"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300" style="color: rgb(244, 186, 52);"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg>
+            </button>
+            <button class="reason-tab w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 relative" data-index="3" style="background: rgba(255, 255, 255, 0.75); border: 2.5px solid var(--pink-soft); box-shadow: var(--shadow-soft);">
+              <span class="badge-dot" style="background: #b34de6;"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300" style="color: rgb(179, 77, 230);"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+            </button>
+          </div>
+
+          <div id="initial-prompt" class="h-40 sm:h-36 flex items-center justify-center max-w-md w-full px-4 mb-6 relative z-10">
+            <p class="font-cursive text-2xl sm:text-3xl text-pink animate-pulse">
+              ✨ Tap the icons above to reveal why I love you Tanu... ✨
+            </p>
+          </div>
+
+          <div id="reason-card" class="h-40 sm:h-36 hidden items-center justify-center max-w-md w-full px-4 mb-6 relative z-10">
+            <div class="p-5 sm:p-6 rounded-3xl border border-pink-soft/80 text-center w-full relative overflow-hidden backdrop-blur-md bg-[#fffdf9]/95 shadow-xl" style="box-shadow: var(--shadow-card);">
+              <div class="absolute inset-0 bg-[linear-gradient(rgba(244,63,94,0.04)_1px,transparent_1px)] bg-[length:100%_22px] pointer-events-none opacity-60"></div>
+              <div class="absolute top-2 right-4 w-7 h-7 rounded-full flex items-center justify-center border border-white/50 text-[11px] text-white font-bold select-none shadow-md" style="background: radial-gradient(circle, var(--crimson) 0%, hsl(343, 65%, 34%) 100%);">♥</div>
+              <h4 id="reason-title" class="font-cursive text-2xl sm:text-3xl font-bold mb-1 relative z-10"></h4>
+              <p id="reason-desc" class="font-hand text-lg sm:text-xl text-[#1a1a1a] leading-relaxed font-semibold relative z-10 px-2"></p>
+            </div>
+          </div>
+
+          <!-- Added bouquet-floating class here for Page 4 Tulip Bouquet -->
+          <div class="relative flex justify-center items-center mb-4 bouquet-floating">
+            <div id="petals-container" class="absolute inset-0 pointer-events-none overflow-visible z-0"></div>
+            
+            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/red-bouquet-DHkMRWDh.png" alt="Bouquet" loading="lazy" class="w-48 sm:w-60 md:w-64 h-auto drop-shadow-[0_20px_35px_rgba(244,63,94,0.25)] relative z-10">
+            <div class="absolute bottom-2 w-32 h-4 bg-crimson/10 rounded-full blur-md animate-pulse pointer-events-none z-10"></div>
+          </div>
+
+          <button id="p4-continue-btn" class="mt-6 px-10 py-3 rounded-full font-body font-bold text-white relative overflow-hidden group shadow-lg transition-all duration-200" style="background: var(--gradient-pink); box-shadow: var(--shadow-pink);">
+            <span class="relative z-10">Continue</span>
+          </button>
+        </div>
+
+        <div id="page-5" class="min-h-screen flex flex-col items-center justify-center px-6 py-12 text-center hidden relative overflow-hidden z-10">
+          <button id="p5-back-btn" class="fixed top-4 left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300" style="background: rgb(241, 236, 228); border: 1px solid rgb(216, 209, 202); color: rgb(138, 111, 92);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          <h2 class="font-display italic font-bold text-2xl sm:text-3xl md:text-4xl text-maroon mb-8">
+            A letter carrying all my love for Tanu...
+          </h2>
+
+          <!-- Added envelope-floating class here for Page 5 Mail Letter envelope -->
+          <div id="envelope-wrapper" class="cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95 flex flex-col items-center envelope-floating">
+            <div class="envelope-box">
+              <div class="envelope-top"></div>
+              <div class="envelope-bottom"></div>
+              <div class="relative z-30 w-12 h-12 rounded-full flex items-center justify-center shadow-lg animate-pulse" style="background: var(--gradient-pink);">
+                <span class="text-white text-xl">♥</span>
+              </div>
+            </div>
+            
+            <p class="font-body text-sm sm:text-base text-pink/80 mt-6 animate-bounce font-medium">
+              Tap to open
+            </p>
+          </div>
+
+          <div id="letter-content" class="hidden relative max-w-md w-full bg-white rounded-2xl p-7 sm:p-9 text-left shadow-xl message-box mt-2" style="box-shadow: var(--shadow-card);">
+            <div class="absolute -top-3 -right-3 w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--gradient-pink); box-shadow: var(--shadow-pink);">
+              <span class="text-white text-lg">♥</span>
+            </div>
+
+            <p id="typewriter-text" class="font-hand text-xl sm:text-2xl leading-relaxed whitespace-pre-line text-ink/85"></p>
+
+            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/bunnies-DazJaouu.png" alt="Bunnies" width="1024" height="1024" loading="lazy" class="absolute bottom-3 right-3 w-14 sm:w-16 h-auto opacity-90">
+          </div>
+
+          <button id="p5-continue-btn" class="hidden mt-8 px-8 py-2.5 rounded-full font-body font-semibold text-white shadow-lg transition-transform active:scale-95 message-box" style="background: var(--gradient-pink); box-shadow: var(--shadow-pink);">
+            Continue
+          </button>
+        </div>
+
+        <div id="page-6" class="min-h-screen flex flex-col items-center justify-center px-6 py-12 text-center hidden relative overflow-hidden z-10">
+          <button id="p6-back-btn" class="fixed top-4 left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300" style="background: rgb(241, 236, 228); border: 1px solid rgb(216, 209, 202); color: rgb(138, 111, 92);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          <h2 class="font-cursive text-4xl sm:text-5xl md:text-6xl text-crimson mb-2">
+            One Last Thing... 🎁
+          </h2>
+
+          <p class="font-body text-sm sm:text-base text-pink/80 mb-8 max-w-xs mx-auto">
+            A tiny token of my love just for you. Tap the gift to open it
+          </p>
+
+          <!-- Added gift-floating class here for Page 6 Gift Box -->
+          <div id="gift-box-wrapper" class="cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 my-4 flex justify-center items-center gift-floating">
+            <svg style="width: 140px; height: 140px;" class="drop-shadow-xl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="40" width="60" height="45" rx="6" fill="#FFAEC9" stroke="#E07998" stroke-width="3.5" />
+              <rect x="44" y="40" width="12" height="45" fill="#F43F5E" />
+              <rect x="15" y="32" width="70" height="12" rx="3" fill="#FFC5D3" stroke="#E07998" stroke-width="3.5" />
+              <rect x="44" y="32" width="12" height="12" fill="#F43F5E" />
+              <path d="M47 32 C30 15, 20 30, 47 32 Z" fill="#F43F5E" stroke="#E07998" stroke-width="2" />
+              <path d="M53 32 C70 15, 80 30, 53 32 Z" fill="#F43F5E" stroke="#E07998" stroke-width="2" />
+              <circle cx="50" cy="32" r="4.5" fill="#E02448" />
+            </svg>
+          </div>
+        </div>
+
+        <div id="page-7" class="min-h-screen flex flex-col items-center justify-start px-6 py-12 text-center hidden relative z-10">
+          <button id="p7-back-btn" class="fixed top-4 left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300" style="background: rgb(241, 236, 228); border: 1px solid rgb(216, 209, 202); color: rgb(138, 111, 92);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          <!-- Removed final-floating-card class from here so Page 7 has no floating animation -->
+          <div class="relative bg-white rounded-3xl p-5 mt-4 shadow-xl message-box" style="box-shadow: var(--shadow-card);">
+            <div class="absolute -top-3 -right-3 w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--gradient-pink); box-shadow: var(--shadow-pink);">
+              <span class="text-white text-lg">♥</span>
+            </div>
+            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/final-hbd-CwGd_Q7K.png" alt="Bunny and bear celebrating" width="1024" height="1024" loading="lazy" class="w-56 sm:w-64 h-auto">
+          </div>
+
+          <h2 class="font-cursive text-4xl sm:text-5xl text-crimson mt-8">
+            Lots of love for Tanu <span class="text-pink">❤</span>
+          </h2>
+          
+          <p class="font-display italic text-base sm:text-lg text-maroon mt-3">
+            Once again, Happy Birthday Tanu!!
+          </p>
+          
+          <p class="font-display italic text-base sm:text-lg text-maroon">
+            <span class="text-pink">💕</span> Tanu you mean everything to me and I hope this little surprise made you smile.
+          </p>
+
+          <button id="p7-replay-btn" class="mt-6 px-6 py-2 rounded-full font-body text-sm text-ink/70 bg-white border border-pink-soft/60 transition-transform active:scale-95" style="box-shadow: var(--shadow-soft);">
+            ↻ Replay
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      let poppedCount = 0;
+      let typewriterTimeout = null;
+
+      const music = document.getElementById('bg-music');
+      const audioIcon = document.getElementById('audio-icon');
+
+      function updateAudioIcon() {
+        if (music.paused) {
+          audioIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+        } else {
+          audioIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+        }
+      }
+
+      function toggleAudio() {
+        if (music.paused) {
+          music.play().then(() => {
+            updateAudioIcon();
+          }).catch(e => console.log("Play error:", e));
+        } else {
+          music.pause();
+          updateAudioIcon();
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        music.play().then(() => {
+          updateAudioIcon();
+        }).catch(() => {
+          updateAudioIcon();
+          const unlockAudio = () => {
+            music.play().then(() => {
+              updateAudioIcon();
+              window.removeEventListener('click', unlockAudio);
+              window.removeEventListener('touchstart', unlockAudio);
+            }).catch(() => {});
+          };
+          window.addEventListener('click', unlockAudio, { once: true });
+          window.addEventListener('touchstart', unlockAudio, { once: true });
+        });
+
+        if (window.confetti) {
+          confetti({
+            particleCount: 100,
+            spread: 90,
+            origin: { y: 0.5 }
+          });
+        }
+      });
+
+      const reasonsData = [
+        { title: "💖 Your Warm Heart", desc: "Your infinite kindness and how deeply you care for everyone around you.", color: "#111111", petalColor: "#e02448" },
+        { title: "✨ Your Radiant Smile", desc: "How your smile instantly brightens up even the gloomiest of days.", color: "#e03166", petalColor: "#f48fb1" },
+        { title: "😊 Your Playful Laugh", desc: "The sound of your laugh that never fails to lift my spirits.", color: "#f4ba34", petalColor: "#f4ba34" },
+        { title: "⭐ Simply Being You", desc: "Everything about who you are —genuine, beautiful, and uniquely special.", color: "#b34de6", petalColor: "#b34de6" }
+      ];
+
+      const letterMessage = `To my favorite person Tanu 💗
+
+Happy Birthday Tanu ❤️🎂✨
+
+Tanu you are the most beautiful of my world—the comfort in my quiet moments, and the joy in my everyday life. Every single day with you feels like a gift and I am so incredibly lucky to walk beside someone as kind, loving, and special as you 🌸✨
+
+On your birthday I wish you all the laughter, warmth, and peace that you bring into my life. I pray that your days ahead are filled with happiness and that every dream in your heart comes true 🌍💫
+
+Thank you for loving me Tanu, for being my safe space, and for making the world a brighter place just by being yourself 🌹🥰
+
+No matter where life takes us I promise to stand by your side, to support you through everything, and to love you more with every passing day 💗
+
+Happy Birthday my love... I loveee youuuu then, now and forever beyond what words can ever say 💕`;
+
+      function resetBalloons() {
+        poppedCount = 0;
+        document.querySelectorAll('.balloon-btn').forEach(btn => {
+          btn.classList.remove('balloon-popped');
+        });
+        document.querySelectorAll('.msg-container').forEach(c => {
+          c.innerHTML = '';
+        });
+        document.getElementById('continue-container').classList.add('hidden');
+      }
+
+      function resetPage4() {
+        reasonTabs.forEach(t => t.classList.remove('tab-active'));
+        initialPrompt.classList.remove('hidden');
+        reasonCard.classList.add('hidden');
+        reasonCard.classList.remove('flex');
+        petalsContainer.innerHTML = '';
+      }
+
+      function resetPage5() {
+        if (typewriterTimeout) clearTimeout(typewriterTimeout);
+        envelopeWrapper.classList.remove('hidden');
+        letterContent.classList.add('hidden');
+        document.getElementById('p5-continue-btn').classList.add('hidden');
+        typewriterText.textContent = "";
+      }
+
+      function showPage(pageNumber) {
+        if (pageNumber === 2) {
+          resetBalloons();
+        }
+        if (pageNumber === 4) {
+          resetPage4();
+        }
+        if (pageNumber === 5) {
+          resetPage5();
+        }
+
+        for (let i = 1; i <= 7; i++) {
+          const page = document.getElementById(`page-${i}`);
+          if (page) {
+            if (i === pageNumber) {
+              page.classList.remove('hidden');
+            } else {
+              page.classList.add('hidden');
+            }
+          }
+        }
+        window.scrollTo(0, 0);
+
+        if (pageNumber === 1 && window.confetti) {
+          confetti({
+            particleCount: 100,
+            spread: 90,
+            origin: { y: 0.5 }
+          });
+        }
+      }
+
+      const noBtn = document.getElementById('no-btn');
+      const p1YesBtn = document.getElementById('p1-yes-btn');
+
+      noBtn.addEventListener('mouseover', moveNoButton);
+      noBtn.addEventListener('touchstart', moveNoButton);
+
+      function moveNoButton() {
+        const x = (Math.random() - 0.5) * 200;
+        const y = (Math.random() - 0.5) * 200;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      }
+
+      p1YesBtn.addEventListener('click', () => {
+        noBtn.style.transform = `translate(0px, 0px)`;
+
+        if (window.confetti) {
+          setTimeout(() => confetti.reset(), 25);
+        }
+
+        showPage(2);
+      });
+
+      const balloonBtns = document.querySelectorAll('.balloon-btn');
+      balloonBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (this.classList.contains('balloon-popped')) return;
+
+          this.classList.add('balloon-popped');
+          const msg = this.getAttribute('data-msg');
+          const msgContainer = this.parentElement.nextElementSibling;
+          
+          if (msgContainer) {
+            msgContainer.innerHTML = `<p class="font-hand text-lg sm:text-xl text-crimson font-bold message-box">${msg}</p>`;
+          }
+
+          const rect = this.getBoundingClientRect();
+          const xPos = (rect.left + rect.width / 2) / window.innerWidth;
+          const yPos = (rect.top + rect.height / 2) / window.innerHeight;
+
+          if (window.confetti) {
+            confetti({
+              particleCount: 18,
+              spread: 45,
+              startVelocity: 22,
+              scalar: 0.85,
+              ticks: 70,
+              origin: { x: xPos, y: yPos }
+            });
+          }
+
+          poppedCount++;
+          if (poppedCount >= 4) {
+            document.getElementById('continue-container').classList.remove('hidden');
+          }
+        });
+      });
+
+      document.getElementById('p2-continue-btn').addEventListener('click', () => showPage(3));
+      document.getElementById('p2-back-btn').addEventListener('click', () => {
+        noBtn.style.transform = `translate(0px, 0px)`;
+        resetBalloons();
+        showPage(1);
+      });
+
+      const p3ContinueBtn = document.getElementById('p3-continue-btn');
+      p3ContinueBtn.addEventListener('click', () => {
+        showPage(4);
+      });
+      document.getElementById('p3-back-btn').addEventListener('click', () => showPage(2));
+
+      const reasonTabs = document.querySelectorAll('.reason-tab');
+      const initialPrompt = document.getElementById('initial-prompt');
+      const reasonCard = document.getElementById('reason-card');
+      const reasonTitle = document.getElementById('reason-title');
+      const reasonDesc = document.getElementById('reason-desc');
+      const petalsContainer = document.getElementById('petals-container');
+
+      function triggerPetals(color) {
+        petalsContainer.innerHTML = '';
+        const animTypes = ['petal-a', 'petal-b', 'petal-c', 'petal-d', 'petal-e', 'petal-f', 'petal-g', 'petal-h', 'petal-i', 'petal-j'];
+        
+        for (let i = 0; i < 10; i++) {
+          const petal = document.createElement('div');
+          petal.className = `floating-petal ${animTypes[i]}`;
+          petal.style.backgroundColor = color;
+          
+          const randomXOffset = (Math.random() - 0.5) * 160; 
+          petal.style.left = `calc(50% + ${randomXOffset}px)`;
+          petal.style.top = `${55 + (Math.random() * 25)}%`;
+          
+          petalsContainer.appendChild(petal);
+        }
+      }
+
+      reasonTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          reasonTabs.forEach(t => t.classList.remove('tab-active'));
+          this.classList.add('tab-active');
+
+          const index = parseInt(this.getAttribute('data-index'));
+          const data = reasonsData[index];
+
+          if (data) {
+            initialPrompt.classList.add('hidden');
+            reasonCard.classList.remove('hidden');
+            reasonCard.classList.add('flex');
+            
+            reasonTitle.textContent = data.title;
+            reasonTitle.style.color = data.color;
+            reasonDesc.textContent = data.desc;
+
+            triggerPetals(data.petalColor);
+          }
+        });
+      });
+
+      document.getElementById('p4-continue-btn').addEventListener('click', () => showPage(5));
+      document.getElementById('p4-back-btn').addEventListener('click', () => showPage(3));
+
+      const envelopeWrapper = document.getElementById('envelope-wrapper');
+      const letterContent = document.getElementById('letter-content');
+      const typewriterText = document.getElementById('typewriter-text');
+      const p5ContinueBtn = document.getElementById('p5-continue-btn');
+
+      envelopeWrapper.addEventListener('click', () => {
+        envelopeWrapper.classList.add('hidden');
+        letterContent.classList.remove('hidden');
+        p5ContinueBtn.classList.add('hidden');
+
+        typewriterText.textContent = "";
+        if (typewriterTimeout) clearTimeout(typewriterTimeout);
+
+        let i = 0;
+        function typeWriter() {
+          if (i < letterMessage.length) {
+            typewriterText.textContent += letterMessage.charAt(i);
+            i++;
+            typewriterTimeout = setTimeout(typeWriter, 8);
+          } else {
+            p5ContinueBtn.classList.remove('hidden');
+          }
+        }
+        typeWriter();
+      });
+
+      p5ContinueBtn.addEventListener('click', () => showPage(6));
+      document.getElementById('p5-back-btn').addEventListener('click', () => {
+        if (typewriterTimeout) clearTimeout(typewriterTimeout);
+        showPage(4);
+      });
+
+      const giftBoxWrapper = document.getElementById('gift-box-wrapper');
+      giftBoxWrapper.addEventListener('click', () => {
+        if (window.confetti) {
+          confetti({
+            particleCount: 150,
+            spread: 100,
+            origin: { y: 0.5 }
+          });
+        }
+        showPage(7);
+      });
+
+      document.getElementById('p6-back-btn').addEventListener('click', () => showPage(5));
+
+      document.getElementById('p7-replay-btn').addEventListener('click', () => {
+        noBtn.style.transform = `translate(0px, 0px)`;
+        resetBalloons();
+        resetPage4();
+        resetPage5();
+
+        showPage(1);
+      });
+
+      document.getElementById('p7-back-btn').addEventListener('click', () => showPage(6));
+    </script>
+  </body>
+</html>
