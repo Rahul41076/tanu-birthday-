@@ -13,6 +13,11 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
+      /* Force system-wide emoji support for Windows and cross-platforms */
+      body, h1, h2, h3, h4, p, span, button {
+        font-family: 'Inter', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+      }
+
       #no-btn {
         transition: transform 0.2s ease;
         position: relative;
@@ -52,7 +57,6 @@
         animation: gentleFloat 3.5s ease-in-out infinite;
       }
 
-      /* Added floating animation classes for Bouquet, Envelope, and Gift Box */
       .bouquet-floating {
         animation: gentleFloat 3.4s ease-in-out infinite;
       }
@@ -187,8 +191,8 @@
   </head>
   <body class="bg-[#fcf8f2]">
 
-    <!-- Preload image to fix late loading -->
     <link rel="preload" as="image" href="https://demo-happy-birthday-my-love.netlify.app/assets/red-bouquet-DHkMRWDh.png">
+    <link rel="preload" as="image" href="https://demo-happy-birthday-my-love.netlify.app/assets/final-hbd-CwGd_Q7K.png">
 
     <div style="position: fixed; top: 1rem; right: 1rem; z-index: 50;">
       <audio id="bg-music" preload="auto" autoplay loop>
@@ -351,7 +355,7 @@
           </p>
           
           <div class="relative w-64 sm:w-72 md:w-80 select-none mb-6 cake-floating">
-            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/cake-L8I26anr.png" alt="Cake" class="w-full h-auto drop-shadow-xl relative z-10">
+            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/cake-L8I26anr.png" alt="Cake" class="w-full h-auto drop-shadow-xl relative z-10" loading="eager" fetchpriority="high">
           </div>
 
           <div class="flex flex-col items-center gap-4 z-30">
@@ -396,7 +400,6 @@
             </button>
           </div>
 
-          <!-- Removed animation/blinking effect from initial-prompt text -->
           <div id="initial-prompt" class="h-40 sm:h-36 flex items-center justify-center max-w-md w-full px-4 mb-6 relative z-10">
             <p class="font-cursive text-2xl sm:text-3xl text-pink">
               ✨ Tap the icons above to reveal why I love you Tanu... ✨
@@ -412,7 +415,6 @@
             </div>
           </div>
 
-          <!-- Added bouquet-floating class here for Page 4 Tulip Bouquet -->
           <div class="relative flex justify-center items-center mb-4 bouquet-floating">
             <div id="petals-container" class="absolute inset-0 pointer-events-none overflow-visible z-0"></div>
             
@@ -436,7 +438,6 @@
             A letter carrying all my love for Tanu...
           </h2>
 
-          <!-- Added envelope-floating class here for Page 5 Mail Letter envelope -->
           <div id="envelope-wrapper" class="cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95 flex flex-col items-center envelope-floating">
             <div class="envelope-box">
               <div class="envelope-top"></div>
@@ -481,7 +482,6 @@
             A tiny token of my love just for you. Tap the gift to open it
           </p>
 
-          <!-- Added gift-floating class here for Page 6 Gift Box -->
           <div id="gift-box-wrapper" class="cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 my-4 flex justify-center items-center gift-floating">
             <svg style="width: 140px; height: 140px;" class="drop-shadow-xl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="20" y="40" width="60" height="45" rx="6" fill="#FFAEC9" stroke="#E07998" stroke-width="3.5" />
@@ -502,12 +502,11 @@
             </svg>
           </button>
 
-          <!-- Removed final-floating-card class from here so Page 7 has no floating animation -->
           <div class="relative bg-white rounded-3xl p-5 mt-4 shadow-xl message-box" style="box-shadow: var(--shadow-card);">
             <div class="absolute -top-3 -right-3 w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--gradient-pink); box-shadow: var(--shadow-pink);">
               <span class="text-white text-lg">♥</span>
             </div>
-            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/final-hbd-CwGd_Q7K.png" alt="Bunny and bear celebrating" width="1024" height="1024" loading="lazy" class="w-56 sm:w-64 h-auto">
+            <img src="https://demo-happy-birthday-my-love.netlify.app/assets/final-hbd-CwGd_Q7K.png" alt="Bunny and bear celebrating" width="1024" height="1024" loading="eager" fetchpriority="high" class="w-56 sm:w-64 h-auto">
           </div>
 
           <h2 class="font-cursive text-4xl sm:text-5xl text-crimson mt-8">
